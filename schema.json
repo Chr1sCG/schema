@@ -1,0 +1,113 @@
+{
+    "highlight": {
+        "id": {
+            "name": "Id",
+            "type": "id"
+        },
+        "name": {
+            "name": "Name",
+            "type": "text"
+        },
+        "text": {
+            "name": "Text",
+            "type": "text",
+            "subType": "md"
+        },
+        "note": {
+            "name": "Note",
+            "type": "text"
+        },
+        "location": {
+            "name": "Location",
+            "type": "number",
+            "subType": "integer"
+        },
+        "highlighted_at": {
+            "name": "Highlighted at",
+            "type": "date"
+        },
+        "updated": {
+            "name": "Updated",
+            "type": "date"
+        },
+        "url": {
+            "name": "URL",
+            "type": "text",
+            "subType": "url"
+        },
+        "color": {
+            "name": "Highlight color",
+            "type": "text"
+        },
+        "location_type": {
+            "name": "Location type",
+            "type": "text",
+            "subType": "single-select"
+        },
+        "tags": {
+            "name": "Tags",
+            "type": "array[text]",
+            "subType": "multi-select"            
+        },
+        "book": {
+            "name": "Book ",
+            "type": "text",
+            "relation": {
+                "cardinality": "many-to-one",
+                "name": "Book",
+                "targetName": "Highlights",
+                "targetType": "book",
+                "targetFieldId": "id"
+            }
+        }
+    },
+    "book": {
+        "id": {
+            "name": "Id",
+            "type": "id"
+        },
+        "name": {
+            "name": "Name",
+            "type": "text"
+        },
+        "author": {
+            "name": "Author",
+            "type": "text"
+        },
+        "category": {
+            "name": "Category",
+            "type": "text"
+        },
+        "source": {
+            "name": "Source",
+            "type": "text"
+        },
+        "updated": {
+            "name": "Updated",
+            "type": "date"
+        },
+        "cover_image_url": {
+            "name": "Cover image",
+            "type": "text",
+            "subType": "url"
+        },
+        "source_url": {
+            "name": "Source URL",
+            "type": "text",
+            "subType": "url"
+        },
+        "asin": {
+            "name": "ASIN",
+            "type": "text"
+        },
+        "document_note": {
+            "name": "Note",
+            "type": "text"
+        },
+        "tags": {
+            "name": "Tags",
+            "type": "array[text]",
+            "subType": "multi-select"            
+        }
+    }
+}

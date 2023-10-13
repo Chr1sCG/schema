@@ -1,0 +1,38 @@
+{
+  "id": "readwise-app",
+  "name": "Readwise",
+  "version": "1.0.0",
+  "description": "Sync Readwise to Fibery",
+  "authentication": [
+    {
+      "description": "Provide Token",
+      "name": "Token Authentication",
+      "id": "token",
+      "fields": [
+        {   
+          "id":"connectionname", 
+          "title":"Name",
+          "description": "Human-readable name for this configuration",
+          "type":"text",
+          "optional":true
+        },
+        {
+          "id": "token",
+          "title": "Personal Token",
+          "description": "Readwise access token",
+          "type": "text"
+        },
+        {
+          "id":"token-link",
+          "type":"link",
+          "value": "https://readwise.io/access_token",
+          "name": "Click here  to get your Readwise token (need to be logged in)"
+        }
+      ]
+    }
+  ],
+  "sources": [],
+  "responsibleFor": {
+    "dataSynchronization": true
+  }
+}
