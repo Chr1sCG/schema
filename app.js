@@ -54,10 +54,8 @@ app.post(`/api/v1/synchronizer/schema`, (req, res) => res.json(schema));
 
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
 
-    /*
     let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
-    const options = { headers: { 'Authorization': 'Token ' + account.token } };
-    */
+    //const options = { headers: { 'Authorization': 'Token ' + account.token } };
         
     if (requestedType !== `space` && requestedType != `database`) {
         throw new Error(`Only these items can be synchronized`);
