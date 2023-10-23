@@ -73,9 +73,10 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
                                         });
         const schema = response.body;
         const dummy = schema[0].result['fibery/types'][0]['fibery/name'];
+
+        const databases = schema[0].result['fibery/types'].filter((t) => (t['fibery/meta']['fibery/domain?'] == true && t['fibery/name'] !== 'fibery/user' && t['fibery/deleted?'] == false)).map((t)=> ({id:t['fibery/id'],space:t['fibery/name'].split('/')[0],name:t['fibery/name'].split('/')[1]}));
         
         if (requestedType == `space`){
-            
             
             let items = [{id: uuid("1234"), name: dummy }];
             
@@ -83,7 +84,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         }
         
         else if (requestedType == `database`){
-            let items = schema[0].result['fibery/types'].filter((t) => (t['fibery/meta']['fibery/domain?'] == true && t['fibery/name'] !== 'fibery/user' && t['fibery/deleted?'] == false)).map((t)=> ({id:t['fibery/id'],space:t['fibery/name'].split('/')[0],name:t['fibery/name'].split('/')[1]}));
+            let items = databases;
     
             //let items = [{id: uuid("5678"), name: "DummyDatabase", space: uuid("1234")}];
 
