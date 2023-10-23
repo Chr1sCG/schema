@@ -71,6 +71,8 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
                                             method: `post`,
                                             json: [{ "command": "fibery.schema/query" }]
                                         });
+        const schema = response.body;
+        const dummy = schema[0].result['fibery/types'][0]['fibery/name'];
         
         if (requestedType == `space`){
         /*
@@ -89,7 +91,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         */
         
         //let items = highlights.map((h) => ({...h, id: uuid((h.id).toString()), name: (h.text.length > 100 ? h.text.slice(0,97) + "..." : h.text), text: h.text, book: uuid((h.book_id).toString()), tags: (h.tags).map((t) => t.name)}));
-        let items = [{id: uuid("1234"), name: "DummySpace" }];
+        let items = [{id: uuid("1234"), name: dummy }];
         return res.json({items});
         }
         
