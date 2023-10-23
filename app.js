@@ -55,17 +55,24 @@ app.post(`/api/v1/synchronizer/schema`, (req, res) => res.json(schema));
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
 
     let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
-    const options = { headers: { 'Authorization': 'Token ' + account.wstoken } };
-
-    const optionsString = JSON.stringify(options);
         
     if (requestedType !== `space` && requestedType != `database`) {
         throw new Error(`Only these items can be synchronized`);
     }
-
-    
-    
-    if (requestedType == `space`){
+    else {
+        //const options = { headers: { 'Authorization': 'Token ' + account.wstoken } };
+        const response = await got.post(`https://acme.fibery.io/api/commands`,
+                                        {
+                                            headers: {
+                                                'Authorization': 'Token ' + account.wstoken,
+                                            },
+                                            responseType: `json`,
+                                            resolveBodyOnly: false,
+                                            method: `post`,
+                                            json: [{ "command": "fibery.schema/query" }]
+                                        });
+        
+        if (requestedType == `space`){
         /*
         var url = 'https://readwise.io/api/v2/highlights';
         let response = await got(url, options);
@@ -82,30 +89,32 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         */
         
         //let items = highlights.map((h) => ({...h, id: uuid((h.id).toString()), name: (h.text.length > 100 ? h.text.slice(0,97) + "..." : h.text), text: h.text, book: uuid((h.book_id).toString()), tags: (h.tags).map((t) => t.name)}));
-        let items = [{id: uuid("1234"), name: optionsString }];
+        let items = [{id: uuid("1234"), name: "DummySpace" }];
         return res.json({items});
-    }
-    
-    else if (requestedType == `database`){
-        /*
-        var url = 'https://readwise.io/api/v2/books';
-        let response = await got(url, options);
-        let body = JSON.parse(response.body);
-        let books = body.results;
-
-        let next = body.next;
-        while (next !== null) {
-            response = await got(next, options);
-            body = JSON.parse(response.body);
-            next = body.next;
-            books = books.concat(body.results);
         }
-        */
-
-        let items = [{id: uuid("5678"), name: "DummyDatabase", space: uuid("1234")}];
-        //let items = books.map((b) => ({...b, id: uuid((b.id).toString()), name: b.title, tags: (b.tags).map((t) => t.name)}));
-        return res.json({items});
+        
+        else if (requestedType == `database`){
+            /*
+            var url = 'https://readwise.io/api/v2/books';
+            let response = await got(url, options);
+            let body = JSON.parse(response.body);
+            let books = body.results;
+    
+            let next = body.next;
+            while (next !== null) {
+                response = await got(next, options);
+                body = JSON.parse(response.body);
+                next = body.next;
+                books = books.concat(body.results);
+            }
+            */
+    
+            let items = [{id: uuid("5678"), name: "DummyDatabase", space: uuid("1234")}];
+            //let items = books.map((b) => ({...b, id: uuid((b.id).toString()), name: b.title, tags: (b.tags).map((t) => t.name)}));
+            return res.json({items});
+        }
     }
+
 }));
 
 app.use(function (req, res, next) {
