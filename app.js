@@ -24,18 +24,18 @@ app.get(`/`, (req, res) => res.json(appConfig));
 
 app.post(`/validate`, wrap(async (req, res) => {  
     const token = req.body.fields.wstoken;
-    /*
+    
     if (token != null) {
         const options = { headers: { 'Authorization': 'Token ' + token } };
-        let response = await got('https://acme.fibery.io/api/commands', options);
+        let response = await got.post('https://acme.fibery.io/api/commands', options);
 
         if (response.statusCode === 200) {
             if (req.body.fields.wsname) {
-            */
+            
                 return res.json({
                     name: `${req.body.fields.wsname}`
                 });
-    /*
+    
             }
             return res.json({
                 name: 'Schema'
@@ -43,7 +43,7 @@ app.post(`/validate`, wrap(async (req, res) => {
         }
     }
     res.status(401).json({message: `Invalid access token`});
-    */    
+        
 }));
 
 const syncConfig = require(`./config.sync.json`);
