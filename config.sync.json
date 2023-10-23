@@ -1,12 +1,12 @@
 {
   "types": [
     {
-      "id": "highlight",
-      "name": "Highlight"
+      "id": "space",
+      "name": "Space"
     },
     {
-      "id": "book",
-      "name":"Book"
+      "id": "database",
+      "name":"Database"
     }  
   ],
   "filters": [
