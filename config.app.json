@@ -1,32 +1,32 @@
 {
-  "id": "readwise-app",
-  "name": "Readwise",
+  "id": "schema-app",
+  "name": "Schema",
   "version": "1.0.0",
-  "description": "Sync Readwise to Fibery",
+  "description": "Get the Spaces and Databases in the workspace schema",
   "authentication": [
     {
-      "description": "Provide Token",
+      "description": "Provide API Token",
       "name": "Token Authentication",
       "id": "token",
       "fields": [
         {   
-          "id":"connectionname", 
+          "id":"name", 
           "title":"Name",
           "description": "Human-readable name for this configuration",
           "type":"text",
           "optional":true
         },
         {
-          "id": "token",
-          "title": "Personal Token",
-          "description": "Readwise access token",
+          "id": "wsname",
+          "title": "Workspace",
+          "description": "Exact name of the workspace (case-sensitive, without .fibery.io)",
           "type": "text"
         },
         {
-          "id":"token-link",
-          "type":"link",
-          "value": "https://readwise.io/access_token",
-          "name": "Click here  to get your Readwise token (need to be logged in)"
+          "id": "wstoken",
+          "title": "API Token",
+          "description": "An Admin API token for the workspace (see https://<your workspace>.fibery.io/fibery/settings/api-tokens)",
+          "type": "text"
         }
       ]
     }
