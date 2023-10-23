@@ -55,7 +55,9 @@ app.post(`/api/v1/synchronizer/schema`, (req, res) => res.json(schema));
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
 
     let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
-    //const options = { headers: { 'Authorization': 'Token ' + account.token } };
+    const options = { headers: { 'Authorization': 'Token ' + account.wstoken } };
+
+    const optionsString = JSON.stringify(options);
         
     if (requestedType !== `space` && requestedType != `database`) {
         throw new Error(`Only these items can be synchronized`);
@@ -80,7 +82,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         */
         
         //let items = highlights.map((h) => ({...h, id: uuid((h.id).toString()), name: (h.text.length > 100 ? h.text.slice(0,97) + "..." : h.text), text: h.text, book: uuid((h.book_id).toString()), tags: (h.tags).map((t) => t.name)}));
-        let items = [{id: uuid("1234"), name: "DummySpace"}];
+        let items = [{id: uuid("1234"), name: optionsString }];
         return res.json({items});
     }
     
