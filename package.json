@@ -1,5 +1,5 @@
 {
-  "name": "readwise-app",
+  "name": "schema-app",
   "version": "1.0.0",
   "private": true,
   "engines": {
@@ -9,11 +9,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "~4.16.0",
-    "express-async-wrap": "^1.0.0",
-    "got": "^11.8.3",
-    "lodash": "^4.17.21",
-    "morgan": "~1.9.0",
-    "uuid-by-string": "^3.0.5"
+    "got": "^13.0.0",
+    "uuid-by-string": "^4.0.0"
   }
 }
