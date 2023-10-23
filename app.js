@@ -1,8 +1,9 @@
-const express = require(`express`);
+/*const express = require(`express`);
 const path = require(`path`);
 const logger = require(`morgan`);
 const wrap = require(`express-async-wrap`);
 const _ = require(`lodash`);
+*/
 const uuid = require(`uuid-by-string`);
 const got = require(`got`);
 
