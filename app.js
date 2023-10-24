@@ -24,10 +24,12 @@ app.get(`/`, (req, res) => res.json(appConfig));
 
 app.post(`/validate`, wrap(async (req, res) => {  
     const token = req.body.fields.wstoken;
+    const workspace = req.body.fields.wsname;
     
     if (token != null) {
         const options = { headers: { 'Authorization': 'Token ' + token } };
-        let response = await got.post('https://acme.fibery.io/api/commands', options);
+        const url = 'https://' + workspace + '.fibery.io/api/commands';
+        let response = await got.post(url, options);
 
         if (response.statusCode === 200) {
             if (req.body.fields.wsname) {
@@ -60,8 +62,8 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         throw new Error(`Only these items can be synchronized`);
     }
     else {
-        //const options = { headers: { 'Authorization': 'Token ' + account.wstoken } };
-        const response = await got.post(`https://acme.fibery.io/api/commands`,
+        const url = 'https://' + account.wsname + '.fibery.io/api/commands';
+        const response = await got.post(url,
                                         {
                                             headers: {
                                                 'Authorization': 'Token ' + account.wstoken,
