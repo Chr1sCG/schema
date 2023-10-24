@@ -77,8 +77,9 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         const databases = schema[0].result['fibery/types'].filter((t) => (t['fibery/meta']['fibery/domain?'] == true && t['fibery/name'] !== 'fibery/user' && t['fibery/deleted?'] == false)).map((t)=> ({id:t['fibery/id'],spaceName:t['fibery/name'].split('/')[0],name:t['fibery/name'].split('/')[1]}));
         
         if (requestedType == `space`){
+            let spaces = [...new Set(databases.map((d) => d.spaceName))];
             
-            let items = [{id: uuid("1234"), name: dummy }];
+            let items = spaces.map((s) => ({id:uuid(s.spaceName), name:s.spaceName}));
             
             return res.json({items});
         }
