@@ -79,15 +79,13 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         if (requestedType == `space`){
             let spaces = [...new Set(databases.map((d) => d.spaceName))];
             
-            let items = spaces.map((s) => ({id:uuid(s.spaceName), name:s.spaceName}));
+            let items = spaces.map((s) => ({id:uuid(s), name:s}));
             
             return res.json({items});
         }
         
         else if (requestedType == `database`){
             let items = databases.map((d) => ({id:d.id, name:d.name, space:uuid(d.spaceName)}));
-    
-            //let items = [{id: uuid("5678"), name: "DummyDatabase", space: uuid("1234")}];
 
             return res.json({items});
         }
